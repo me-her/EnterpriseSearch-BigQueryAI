@@ -20,7 +20,7 @@ Environment Variables:
     GOOGLE_CLOUD_PROJECT: Google Cloud Project ID (required)
     GCS_BUCKET_NAME: GCS bucket name (required)
     GOOGLE_CLOUD_LOCATION: GCP region (default: us-central1)
-    GCS_PREFIX: GCS prefix path (default: production_contracts/)
+    GCS_PREFIX: GCS prefix path 
     BQ_DATASET: BigQuery dataset (default: contracts_dataset)
     BQ_TABLE: BigQuery table (default: contracts)
 """
