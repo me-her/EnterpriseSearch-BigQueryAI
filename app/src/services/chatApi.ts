@@ -10,7 +10,7 @@ interface SessionResponse {
   lastUpdateTime: number;
 }
 
-const API_BASE_URL = 'http://localhost:8080/chat';
+const API_BASE_URL = 'http://localhost:8080';
 
 // Simple storage helpers
 function getStorageItem(key: string): string | null {
