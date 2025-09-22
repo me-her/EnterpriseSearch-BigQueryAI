@@ -1,0 +1,94 @@
+[project]
+name = "bq-ai-comp-2025"
+version = "0.1.0"
+description = "BQ AI Competition 2025 Project"
+authors = [
+    {name = "Meher Gajula", email = "gajula.meher@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    # Google AI and Cloud Services
+    "google-cloud-storage>=2.10.0",
+    "google-cloud-bigquery>=3.13.0",
+    "google-genai>=1.20.0",
+    "langchain>=0.1.0",
+    "langchain-community>=0.0.13",
+    # Data processing and validation
+    "pydantic>=2.5.0",
+    "pandas>=2.1.0",
+    # Additional utilities
+    "python-dotenv>=1.0.0",
+    "requests>=2.31.0",
+    "tqdm>=4.65.0",
+    "pyyaml>=6.0.0",
+    "google-adk>=1.14.1",
+    "fastapi>=0.117.1",
+    "google-cloud-bigquery-storage>=2.33.1",
+    "pyarrow>=21.0.0",
+    "jupyter>=1.1.1",
+    "ipywidgets>=8.1.7",
+    "db-dtypes>=1.4.3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "mypy>=1.5.0",
+    "pre-commit>=3.5.0",
+]
+docs = [
+    "mkdocs>=1.5.0",
+    "mkdocs-material>=9.4.0",
+]
+
+[tool.uv]
+dev-dependencies = []
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+    \.git
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["src"]
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = [
+    "google.*",
+    "langchain.*",
+]
+ignore_missing_imports = true
