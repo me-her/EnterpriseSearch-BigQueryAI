@@ -1,10 +1,10 @@
-# BQ Competition 2025
+# BigQuery AI Competition 2025
 
-A full-stack application for BQ Competition 2025 featuring Python agents, React frontend, and Google AI/Cloud integration for SEC filings analysis and contract processing.
+A full-stack application for BQ Competition 2025 featuring  AI agents (ADK), React frontend, and BigQuery Storage for SEC filings analysis and contract processing.
 
 ## Overview
 
-This project analyzes SEC contract data using BigQuery's AI/ML capabilities to transform unstructured contract documents into structured, queryable insights.
+This project analyzes SEC contract data using BigQuery's AI/ML capabilities to transform unstructured contract documents into structured, queryable insights. Which includes ObjectRefs to enable AI Functions on the Fly. 
 
 ### Dataset
 
@@ -12,15 +12,15 @@ The project uses the [Material Contract Corpus](https://mcc.law.stanford.edu/dow
 
 ### Data Processing Pipeline
 
-1. **Ingestion** (`src/ingestion/`): Contract documents from the 2020/Q1 subset were processed using Google's Gemini AI to extract structured data including company names, contract types, governing law, parties involved, and key clauses.
+1. **Ingestion** (`src/ingestion/`): Contract documents with a subset of 2020/Q1 documents were processed using Google's Gemini AI to extract structured data including company names, contract types, governing law, parties involved, and key clauses.
    - `extraction.py`: Main extraction script that processes files from Google Cloud Storage
    - `contract_schema.py`: Defines the Pydantic models and BigQuery schema for extracted contract data
 
 2. **BigQuery Storage**: Extracted data is stored in BigQuery tables with a comprehensive schema supporting advanced analytics and AI-powered querying.
 
 3. **AI/ML Integration**: The system leverages BigQuery's built-in AI functions (`AI.GENERATE`, `AI.GENERATE_TABLE`) for intelligent contract analysis and natural language querying.
-   - `notebooks/BQ-MCC-EXPLORATION.ipynb`: Demonstrates BigQuery AI/ML capabilities and data exploration techniques
-   - `notebooks/objectRef.ipynb`: Shows advanced BigQuery object referencing and AI/ML integration
+   - `notebooks/BQ-MCC-EXPLORATION.ipynb`: Exploration on how to use BigQuery AI/ML capabilities
+   - `notebooks/objectRef.ipynb`: Shows how to include multimodal analysis with BigQuery object referencing and AI/ML integration
 
 ### Components
 
@@ -69,7 +69,7 @@ Add your Google Cloud credentials and API keys to a `.env` file:
 ```env
 GOOGLE_CLOUD_PROJECT=your-project-id
 GOOGLE_APPLICATION_CREDENTIALS=path/to/service-account.json
-GOOGLE_API_KEY=your-gemini-api-key
+GOOGLE_CLOUD_LOCATION='your-project-location'
 ```
 
 ## Project Structure
