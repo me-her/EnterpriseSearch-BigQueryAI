@@ -10,6 +10,13 @@ VIEW_NAME = "v_contracts"
 The contracts dataset is a dataset that contains contracts data. The view v_contracts is a view that contains the contracts data. 
 Read the schema of the view v_contracts to know more. 
 
+
+Hints: 
+Try to use the Lower function for company name comparisons to get accurate results. 
+
+WHERE LOWER(column_name) LIKE '%pattern%';
+MAKE SURE TO FOLLOW BigQuery's SQL syntax. 
+
 I am interested in the following fields:
 company_name,
 contract_category,

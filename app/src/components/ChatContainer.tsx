@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { ChatMessage as ChatMessageType, AgentEvent } from '../types/chat';
 import { chatApi } from '../services/chatApi';
 import ChatMessage from './ChatMessage';
@@ -7,6 +7,19 @@ import ChatInput from './ChatInput';
 export default function ChatContainer() {
   const [messages, setMessages] = useState<ChatMessageType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Initialize a new session on app start
+  useEffect(() => {
+    const initializeSession = async () => {
+      try {
+        await chatApi.createNewSession();
+      } catch (error) {
+        console.error('Failed to initialize session:', error);
+      }
+    };
+
+    initializeSession();
+  }, []);
 
   const handleNewChat = async () => {
     try {
@@ -68,7 +81,8 @@ export default function ChatContainer() {
       <div className="bg-white border-b border-gray-200 px-6 py-4 shadow-sm">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
           <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-3">
-            SEC Agent
+            <img src="/BigQuery.png" alt="Bigquery AI/ML assistant" className="w-8 h-8" />
+            Bigquery AI/ML Assistant
           </h1>
           
           {messages.length > 0 && (

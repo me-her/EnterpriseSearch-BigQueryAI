@@ -57,8 +57,13 @@ export const chatApi = {
 
   // Create a new session (clears any existing session)
   async createNewSession(): Promise<string> {
-    const apps = await this.listApps();
-    const appName = apps[0] || 'sec-filings';
+    let appName = 'sec-filings'; // Default fallback
+    try {
+      const apps = await this.listApps();
+      appName = apps[0] || 'sec-filings';
+    } catch (error) {
+      console.warn('Failed to list apps, using default app name:', error);
+    }
     const userId = getUserId();
 
     // Clear existing session from storage
@@ -75,8 +80,13 @@ export const chatApi = {
   // Check if there's an active session
   async hasActiveSession(): Promise<boolean> {
     try {
-      const apps = await this.listApps();
-      const appName = apps[0] || 'sec-filings';
+      let appName = 'sec-filings'; // Default fallback
+      try {
+        const apps = await this.listApps();
+        appName = apps[0] || 'sec-filings';
+      } catch (error) {
+        console.warn('Failed to list apps, using default app name:', error);
+      }
       const userId = getUserId();
       const sessionKey = `chat_session_${appName}_${userId}`;
       return getStorageItem(sessionKey) !== null;
@@ -102,10 +112,15 @@ export const chatApi = {
   },
 
   async sendMessage(message: string, forceNewSession: boolean = false): Promise<AgentEvent[]> {
-    // Get app name (use first available app)
-    const apps = await this.listApps();
-    const appName = apps[0] || 'sec-filings';
-    
+    // Get app name (use first available app, fallback to default)
+    let appName = 'sec-filings'; // Default fallback
+    try {
+      const apps = await this.listApps();
+      appName = apps[0] || 'sec-filings';
+    } catch (error) {
+      console.warn('Failed to list apps, using default app name:', error);
+    }
+
     // Get user ID
     const userId = getUserId();
     
