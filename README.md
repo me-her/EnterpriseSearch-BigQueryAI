@@ -2,6 +2,39 @@
 
 A full-stack application for BQ Competition 2025 featuring Python agents, React frontend, and Google AI/Cloud integration for SEC filings analysis and contract processing.
 
+## Overview
+
+This project analyzes SEC contract data using BigQuery's AI/ML capabilities to transform unstructured contract documents into structured, queryable insights.
+
+### Dataset
+
+The project uses the [Material Contract Corpus](https://mcc.law.stanford.edu/download/contracts/) from Stanford University - a comprehensive dataset containing over 1M contract documents from 2000-2023, with a focus on 2020-2023 data (130k+ documents). The dataset has been uploaded to Google Cloud Storage for processing.
+
+### Data Processing Pipeline
+
+1. **Ingestion** (`src/ingestion/`): Contract documents from the 2020/Q1 subset were processed using Google's Gemini AI to extract structured data including company names, contract types, governing law, parties involved, and key clauses.
+   - `extraction.py`: Main extraction script that processes files from Google Cloud Storage
+   - `contract_schema.py`: Defines the Pydantic models and BigQuery schema for extracted contract data
+
+2. **BigQuery Storage**: Extracted data is stored in BigQuery tables with a comprehensive schema supporting advanced analytics and AI-powered querying.
+
+3. **AI/ML Integration**: The system leverages BigQuery's built-in AI functions (`AI.GENERATE`, `AI.GENERATE_TABLE`) for intelligent contract analysis and natural language querying.
+   - `notebooks/BQ-MCC-EXPLORATION.ipynb`: Demonstrates BigQuery AI/ML capabilities and data exploration techniques
+   - `notebooks/objectRef.ipynb`: Shows advanced BigQuery object referencing and AI/ML integration
+
+### Components
+
+- **Notebooks** (`notebooks/`): Interactive Jupyter notebooks demonstrating BigQuery AI/ML capabilities
+  - `BQ-MCC-EXPLORATION.ipynb`: Explores the Material Contract Corpus data and BigQuery AI/ML features
+  - `objectRef.ipynb`: Advanced BigQuery object referencing and AI/ML integration examples
+
+- **Agents** (`agents/`): Python-based agents for intelligent contract analysis
+  - `main.py`: FAST API app which exposes SEC Agent that queries BigQuery data using AI/ML functions and BigQuery Toolset.
+
+- **Web App** (`app/`): React-based frontend for interacting with AI agents
+  - `src/components/ChatMessage.tsx`: Chat message display component
+  - `src/services/chatApi.ts`: API service for communicating with backend agents
+
 ## Installation
 
 This project uses [uv](https://github.com/astral-sh/uv) for fast Python package management.
@@ -74,7 +107,7 @@ GOOGLE_API_KEY=your-gemini-api-key
 │   └── ingestion/
 │       ├── extraction.py
 │       ├── contract_schema.py
-│       └── README.md
+│    
 ├── pyproject.toml
 ├── uv.lock
 └── README.md
